@@ -1,15 +1,83 @@
-# 🎓 PlanbookAI - AI Tools Portal for High School Teachers
+### Giới thiệ đề tài:
 
-## 📖 Giới Thiệu
+1. Project Overview
 
-**PlanbookAI** là một hệ thống microservices hoàn chỉnh được xây dựng bằng **Python FastAPI**, hỗ trợ giáo viên trung học phổ thông trong việc:
-- 📝 Quản lý ngân hàng câu hỏi
-- 📋 Tạo đề thi và bài tập tự động
-- 🤖 Chấm điểm tự động bằng OCR và AI
-- 📚 Quản lý giáo án
-- 💰 Quản lý gói dịch vụ và đăng ký
+Project Name:
+PlanbookAI – Build an AI Tools Portal for High School Teachers
+Vietnamese Name: PlanbookAI – Xây dựng cổng công cụ AI dành cho giáo viên THPT
+Abbreviation: PBA
 
-## 🏗️ Kiến Trúc Hệ Thống
+Within the scope of the Capstone Project, PlanbookAI (PBA) is developed as an AI-powered tool portal to support high school teachers. Due to limited development time, the system currently focuses on Chemistry teachers, with plans to expand to other subjects in the future.
+
+2. Context & Problem Statement
+
+High school teachers are responsible for both teaching and administrative tasks such as lesson planning, grading, attendance tracking, and reporting. Several key issues have been identified:
+
+High workload & repetition: Tasks like grading and lesson preparation are repetitive and time-consuming.
+
+Manual and fragmented processes: Many tasks are handled manually or using disconnected tools, reducing efficiency.
+
+Lack of intelligent automation: Existing systems provide limited AI support, requiring teachers to perform most tasks manually.
+
+Difficulty accessing resources: Teachers struggle to find suitable templates, teaching materials, and reference resources.
+
+These challenges reduce productivity and increase work pressure on teachers.
+
+3. Proposed Solution – PlanbookAI
+
+PlanbookAI is an AI-powered platform designed to optimize teaching-related tasks through specialized tools such as lesson planning, exam generation, and automated grading. The platform reduces manual workload, improves efficiency, and provides each teacher with a personal workspace to organize teaching materials and resources.
+
+4. Key Features
+
+Question Bank Management: Centralized storage and categorization of questions by subject, topic, and difficulty.
+
+Exercise Creation: Automatic generation of exercises based on learning objectives and student levels.
+
+Multiple Choice Exam Generation: Flexible creation of exams with configurable questions and multiple versions.
+
+OCR-based Grading: Automated grading of multiple-choice exams using OCR for both printed and handwritten answers.
+
+5. System Actors
+
+Admin: Manage users, system configuration, curriculum templates, and revenue tracking.
+
+Manager: Manage service packages, orders, and approve educational content.
+
+Staff: Create sample lesson plans, question banks, and AI prompt templates.
+
+Teacher: Create lesson plans, generate exams, use OCR tools, grade multiple-choice tests, and monitor student performance.
+
+6. Non-Functional Requirements
+
+RESTful API consistency
+
+High performance and scalability
+
+Role-Based Access Control (RBAC) using user roles
+
+7. System Requirements & Deliverables
+
+Documentation: Full UML 2.0 documentation (URD, SRS, SAD, DDD, Testing, Deployment, User Guide).
+
+Technology Stack:
+
+Backend: Spring Boot
+
+Frontend: ReactJS
+
+Database: MySQL
+
+AI & Services: Gemini AI, Supabase
+
+Deployment: Docker, AWS
+
+Architecture:
+
+N-Tier Architecture
+
+JWT-based Authentication
+
+RESTful API communication
 
 ### Microservices Architecture
 ```
@@ -42,77 +110,7 @@
     └──────────┘    └──────────┘           └──────────┘
 ```
 
-### Tech Stack
 
-**Backend:**
-- 🐍 **Python 3.11** - Programming Language
-- ⚡ **FastAPI** - Modern, fast web framework
-- 🗄️ **PostgreSQL** - Relational Database
-- 🐰 **RabbitMQ** - Message Broker for Event-Driven Architecture
-- 🔴 **Redis** - Caching & Session Management
-- 🔐 **JWT** - Authentication
-- 🗃️ **SQLAlchemy** - ORM
-- 🐳 **Docker** - Containerization
-
-**Frontend:**
-- ⚛️ **React.js** - UI Framework
-- 🎨 **Tailwind CSS** - Styling
-- 📡 **Axios** - HTTP Client
-
-**External Services:**
-- 🤖 **Gemini AI** - OCR & AI Analysis
-- ☁️ **Supabase** - File Storage
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Docker & Docker Compose
-- Git
-- 8GB RAM minimum
-
-### Installation
-
-1. **Clone repository**
-```bash
-git clone https://github.com/yourusername/planbookai-microservices.git
-cd planbookai-microservices
-```
-
-2. **Setup environment**
-```bash
-chmod +x scripts/*.sh
-./scripts/setup-env.sh
-```
-
-3. **Update .env file**
-```bash
-nano .env
-# Update GEMINI_API_KEY with your actual API key
-```
-
-4. **Build all services**
-```bash
-./scripts/build-all.sh
-```
-
-5. **Start all services**
-```bash
-./scripts/start-all.sh
-```
-
-6. **Check health**
-```bash
-./scripts/check-health.sh
-```
-
-### Access Points
-
-- 🌐 **API Gateway**: http://localhost:8000
-- 📚 **API Documentation**: http://localhost:8000/docs
-- 🐰 **RabbitMQ Management**: http://localhost:15672 (admin/admin123)
-- 💻 **Frontend**: http://localhost:3000
-- 🗄️ **PostgreSQL**: localhost:5432 (admin/admin123)
-- 🔴 **Redis**: localhost:6379
 
 ## 📂 Project Structure
 
@@ -422,203 +420,5 @@ publish_event("user.created", {
 - answers (JSONB), score
 - feedback, graded_at
 
-## 🧪 Testing
 
-### Run All Tests
-```bash
-./scripts/test-api.sh
-```
 
-### Manual Testing
-
-1. **Register**
-```bash
-curl -X POST http://localhost:8000/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "test@test.com",
-    "username": "testuser",
-    "password": "test123456",
-    "role": "teacher"
-  }'
-```
-
-2. **Login**
-```bash
-curl -X POST http://localhost:8000/auth/login \
-  -d "username=testuser&password=test123456"
-```
-
-3. **Create Question** (với token)
-```bash
-curl -X POST http://localhost:8000/questions \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "subject": "Chemistry",
-    "topic": "Organic",
-    "question_type": "multiple_choice",
-    "question_text": "What is H2O?",
-    "options": {"A": "Water", "B": "Salt"},
-    "correct_answer": "A"
-  }'
-```
-
-## 📈 Monitoring & Logs
-
-### View Logs
-```bash
-# All services
-docker-compose logs -f
-
-# Specific service
-docker-compose logs -f auth-service
-
-# Using script
-./scripts/logs.sh auth-service
-```
-
-### Health Check
-```bash
-# Check all services
-./scripts/check-health.sh
-
-# Manual check
-curl http://localhost:8000/health
-```
-
-### RabbitMQ Management
-- URL: http://localhost:15672
-- Username: admin
-- Password: admin123
-- Monitor: Queues, Messages, Connections
-
-## 🔧 Development
-
-### Add New Service
-
-1. Create service directory
-```bash
-mkdir new-service
-cd new-service
-```
-
-2. Create files
-```
-new-service/
-├── main.py
-├── models.py
-├── database.py
-├── requirements.txt
-└── Dockerfile
-```
-
-3. Add to docker-compose.yml
-```yaml
-new-service:
-  build: ./new-service
-  ports:
-    - "8008:8008"
-  environment:
-    - DATABASE_URL=...
-```
-
-4. Add route in API Gateway
-```python
-@app.api_route("/newservice/{path:path}", methods=["GET", "POST"])
-async def new_proxy(request: Request, path: str):
-    return await proxy_request(request, "http://new-service:8008")
-```
-
-### Database Migration
-```bash
-# Create migration
-alembic revision --autogenerate -m "description"
-
-# Run migration
-alembic upgrade head
-
-# Rollback
-alembic downgrade -1
-```
-
-## 🐛 Troubleshooting
-
-### Service won't start
-```bash
-# Check logs
-docker-compose logs service-name
-
-# Rebuild
-docker-compose build --no-cache service-name
-docker-compose up -d service-name
-```
-
-### Database connection error
-```bash
-# Restart PostgreSQL
-docker-compose restart postgres
-
-# Check if running
-docker-compose ps postgres
-
-# Connect manually
-docker exec -it planbookai_postgres psql -U admin -d planbookai
-```
-
-### RabbitMQ messages stuck
-```bash
-# Check queue length
-# Visit: http://localhost:15672
-
-# Restart RabbitMQ
-docker-compose restart rabbitmq
-
-# Purge queue (BE CAREFUL!)
-docker exec planbookai_rabbitmq rabbitmqctl purge_queue queue_name
-```
-
-## 📝 Environment Variables
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| DATABASE_URL | PostgreSQL connection | postgresql://admin:admin123@postgres:5432/planbookai |
-| RABBITMQ_URL | RabbitMQ connection | amqp://admin:admin123@rabbitmq:5672/ |
-| REDIS_URL | Redis connection | redis://redis:6379 |
-| JWT_SECRET | Secret for JWT | change-in-production |
-| GEMINI_API_KEY | Google AI API key | - |
-| ACCESS_TOKEN_EXPIRE_MINUTES | Token expiration | 30 |
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 👥 Authors
-
-- **Your Name** - *Initial work*
-
-## 🙏 Acknowledgments
-
-- FastAPI framework
-- SQLAlchemy ORM
-- RabbitMQ messaging
-- Docker containerization
-- All contributors
-
-## 📞 Support
-
-- Email: support@planbookai.com
-- Issues: [GitHub Issues](https://github.com/yourusername/planbookai/issues)
-- Docs: [Documentation](https://docs.planbookai.com)
-
----
-
-Made with ❤️ for Teachers
