@@ -1,0 +1,86 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=1
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=1
+            - AuthenticationFilter
+        - id: question-service
+          uri: lb://question-service
+          predicates:
+            - Path=/api/questions/**
+          filters:
+            - StripPrefix=1
+            - AuthenticationFilter
+        - id: exam-service
+          uri: lb://exam-service
+          predicates:
+            - Path=/api/exams/**
+          filters:
+            - StripPrefix=1
+            - AuthenticationFilter
+        - id: lesson-service
+          uri: lb://lesson-service
+          predicates:
+            - Path=/api/lessons/**
+          filters:
+            - StripPrefix=1
+            - AuthenticationFilter
+        - id: package-service
+          uri: lb://package-service
+          predicates:
+            - Path=/api/packages/**
+          filters:
+            - StripPrefix=1
+            - AuthenticationFilter
+        - id: ocr-service
+          uri: lb://ocr-service
+          predicates:
+            - Path=/api/ocr/**
+          filters:
+            - StripPrefix=1
+            - AuthenticationFilter
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+
+# Shared Secret for JWT Verification (Must match auth-service)
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka/

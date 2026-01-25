@@ -1,0 +1,5 @@
+D:\XD-PhanMem\PlanbookAI\backend\api-gateway\src\main\java\com\planbookai\gateway\ApiGatewayApplication.java
+D:\XD-PhanMem\PlanbookAI\backend\api-gateway\src\main\java\com\planbookai\gateway\util\JwtUtil.java
+D:\XD-PhanMem\PlanbookAI\backend\api-gateway\src\main\java\com\planbookai\gateway\filter\AuthenticationFilter.java
+D:\XD-PhanMem\PlanbookAI\backend\api-gateway\src\main\java\com\planbookai\gateway\config\SecurityConfig.java
+D:\XD-PhanMem\PlanbookAI\backend\api-gateway\src\main\java\com\planbookai\gateway\controller\HomeController.java
